@@ -1,0 +1,20 @@
+class Solution(object):
+    def __init__(self):
+        self.res = []
+    def binaryTreePaths(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+        self.dfs(root, '')
+        return self.res
+
+    def dfs(self, root, curr):  
+        if root:
+            if not root.left and not root.right:
+                curr = curr + str(root.val)
+                self.res.append(curr)
+            else:
+                curr = curr + str(root.val)+ "->"
+                self.dfs(root.left, curr)
+                self.dfs(root.right, curr)
