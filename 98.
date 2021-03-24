@@ -1,0 +1,28 @@
+# bad solution
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        res, _, _ = self.dfs(root)
+        return res
+    def dfs(self, root):
+        if not root:
+            return True, None, None
+
+        if not root.left:
+            l = True
+            l_min = root.val
+        else:
+            l, l_min, l_max = self.dfs(root.left)
+            l = l and l_max < root.val
+        
+        if not root.right:
+            r = True
+            r_max = root.val
+        else:
+            r, r_min, r_max = self.dfs(root.right)
+            r = r and r_min > root.val
+
+        return l and r, l_min, r_max
