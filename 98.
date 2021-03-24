@@ -25,8 +25,9 @@ class Solution(object):
             r, r_min, r_max = self.dfs(root.right)
             r = r and r_min > root.val
 
-        return l and r, l_min, r_max
-# good solution
+        return l and r, l_min, r_max.
+        
+# good solution 1
 class Solution(object):
     def __init__(self):
         self.traverse = []
@@ -50,3 +51,21 @@ class Solution(object):
         self.dfs(root.left)
         self.traverse.append(root.val)
         self.dfs(root.right)
+
+# good solution 2
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        return self.dfs(root, None, None)
+    def dfs(self, root, min_val, max_val):
+        if not root:
+            return True
+        if min_val != None and root.val <= min_val:
+            return False
+        if max_val != None and root.val >= max_val:
+            return False
+        
+        return self.dfs(root.left, min_val, root.val) and self.dfs(root.right, root.val, max_val)
