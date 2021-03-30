@@ -7,3 +7,17 @@ class Solution(object):
         :rtype: List[int]
         """
         return sorted(arr)[:k]
+
+# heap not elegant enough
+class Solution(object):
+    def getLeastNumbers(self, arr, k):
+        """
+        :type arr: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        heapq.heapify(arr)
+        res = []
+        for _ in range(k):
+            res.append(heapq.heappop(arr))
+        return res
