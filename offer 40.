@@ -16,8 +16,8 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        heapq.heapify(arr)
+        heapq.heapify(arr) # O(n)
         res = []
-        for _ in range(k):
+        for _ in range(k): # O(1)
             res.append(heapq.heappop(arr))
         return res
