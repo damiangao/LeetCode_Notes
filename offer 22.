@@ -1,0 +1,18 @@
+# elegant solution
+class Solution(object):
+    def getKthFromEnd(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        end = head
+        while k:
+            end = end.next
+            k = k - 1
+        
+        while end:
+            end = end.next
+            head = head.next
+
+        return head
