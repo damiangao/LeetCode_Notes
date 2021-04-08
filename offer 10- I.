@@ -1,0 +1,12 @@
+class Solution(object):
+    def fib(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, (a + b) % (1e9+7)
+            n -= 1
+        return int(a)
