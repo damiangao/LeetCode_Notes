@@ -28,3 +28,26 @@ public:
         return false;
     }
 };
+
+# python
+class Solution(object):
+    def isSubtree(self, s, t):
+        """
+        :type s: TreeNode
+        :type t: TreeNode
+        :rtype: bool
+        """
+        if not s and not t:
+            return True
+        if not s:
+            return False
+
+        return self.isSametree(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
+    
+    def isSametree(self, s, t):
+        if not s and not t:
+            return True
+        elif not s or not t:
+            return False
+        
+        return s.val == t.val and self.isSametree(s.left, t.left) and self.isSametree(s.right, t.right)
