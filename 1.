@@ -13,3 +13,13 @@ class Solution(object):
             other = target - num
             if other in hashMap and hashMap[other] != i:
                 return [i, hashMap[other]]
+                
+# elegant solution
+class Solution:
+    def twoSum(self, nums, target):
+        hashtable = dict()
+        for i, num in enumerate(nums):
+            if target - num in hashtable:
+                return [hashtable[target - num], i]
+            hashtable[nums[i]] = i
+        return []
