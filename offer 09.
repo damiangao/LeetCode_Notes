@@ -1,0 +1,27 @@
+# elegant solution
+class CQueue(object):
+
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+
+    def appendTail(self, value):
+        """
+        :type value: int
+        :rtype: None
+        """
+        self.s1.append(value)
+
+
+    def deleteHead(self):
+        """
+        :rtype: int
+        """
+        if self.s2:
+            return self.s2.pop()
+        if self.s1:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+            return self.s2.pop()
+        return -1
