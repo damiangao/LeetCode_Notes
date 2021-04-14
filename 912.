@@ -1,0 +1,23 @@
+# quick sort
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        self.quicksort(nums, 0, len(nums)-1)
+        return nums
+    def quicksort(self, nums, l, r):
+        if r - l <= 0:
+            return
+        mid = self.partition(nums, l, r)
+        self.quicksort(nums, l, mid-1)
+        self.quicksort(nums, mid+1, r)
+
+    def partition(self, nums, l, r):
+        pivot = random.randint(l, r)
+        nums[pivot], nums[r] = nums[r], nums[pivot]
+        i = l - 1
+        for j in range(l, r):
+            if nums[j] < nums[r]:
+                i += 1
+                nums[i], nums[j] = nums[j], nums[i]
+        i += 1
+        nums[i], nums[r] = nums[r], nums[i]
+        return i
