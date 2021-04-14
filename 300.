@@ -1,0 +1,13 @@
+# not best
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp = []
+        n = len(nums)
+        for i in range(n):
+            dp.append(1)
+            for j in range(i):
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        return max(dp)
+        
+# todo binarysearch
