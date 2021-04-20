@@ -1,4 +1,3 @@
-# not so fast but elegant
 class Solution(object):
     def zigzagLevelOrder(self, root):
         res = []
