@@ -1,0 +1,11 @@
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        envelopes.sort(key=lambda x : (x[0], -x[1]))
+        dp = [1] * len(envelopes)
+
+        for i, x in enumerate(envelopes):
+            for j in range(i):
+                if x[1] > envelopes[j][1]:
+                    dp[i] = max(dp[i],  dp[j]+1)
+        
+        return max(dp)
