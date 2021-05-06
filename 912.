@@ -48,12 +48,10 @@ class Solution:
                 ret.append(right[pr])
                 pr += 1
         
-        while pl < m:
-            ret.append(left[pl])
-            pl += 1
+        if pl < m:
+            ret += left[pl:]
         
-        while pr < n:
-            ret.append(right[pr])
-            pr += 1
+        if pr < n:
+            ret += right[pr:]
         
         return ret
