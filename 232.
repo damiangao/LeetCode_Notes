@@ -7,7 +7,6 @@ class MyQueue:
         self.l = []
         self.r = []
 
-
     def push(self, x: int) -> None:
         """
         Push element x to the back of queue.
@@ -22,8 +21,6 @@ class MyQueue:
         ret = self.peek()
         self.r.pop()
         return ret
-        
-
 
     def peek(self) -> int:
         """
