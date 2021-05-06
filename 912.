@@ -21,3 +21,39 @@ class Solution:
         i += 1
         nums[i], nums[r] = nums[r], nums[i]
         return i
+
+# merge sort
+class Solution:
+
+    def sortArray(self, nums: List[int]) -> List[int]:
+        return self.mergesort(nums, 0, len(nums)-1)
+    
+    def mergesort(self, nums, l, r):
+        if l == r:
+            return [nums[l]]
+        mid = (l+r) >> 1
+        left = self.mergesort(nums, l, mid)
+        right = self.mergesort(nums, mid+1, r)
+        return self.merge(left, right)
+
+    def merge(self, left, right):
+        m, n = len(left), len(right)
+        pl, pr = 0, 0
+        ret = []
+        while pl < m and pr < n:
+            if left[pl] <= right[pr]:
+                ret.append(left[pl])
+                pl += 1
+            else:
+                ret.append(right[pr])
+                pr += 1
+        
+        while pl < m:
+            ret.append(left[pl])
+            pl += 1
+        
+        while pr < n:
+            ret.append(right[pr])
+            pr += 1
+        
+        return ret
