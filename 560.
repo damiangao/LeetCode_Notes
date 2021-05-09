@@ -1,0 +1,14 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        # 前缀和
+        pre_sum = defaultdict(int)
+        pre_sum[0] = 1
+        ret = 0
+        cur_sum = 0
+        for i in range(n):
+            cur_sum += nums[i]
+            tar_sum = cur_sum - k
+            ret += pre_sum[tar_sum]
+            pre_sum[cur_sum] += 1
+        return ret
