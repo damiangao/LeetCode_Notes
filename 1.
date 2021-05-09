@@ -16,10 +16,10 @@ class Solution(object):
                 
 # elegant solution
 class Solution:
-    def twoSum(self, nums, target):
-        hashtable = dict()
-        for i, num in enumerate(nums):
-            if target - num in hashtable:
-                return [hashtable[target - num], i]
-            hashtable[nums[i]] = i
-        return []
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hashset = {}
+        for i, x in enumerate(nums):
+            other = target - x
+            if (idx := hashset.get(other)) != None:
+                return [idx, i]
+            hashset[x] = i
