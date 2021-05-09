@@ -1,31 +1,18 @@
-# not elegant solution
-class Solution(object):
-    def levelOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        res = []
-        curr_layer_count = 1
-        next_layer_count = 0
+# elegant solution
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
-            return res
-        q = deque() 
-        q.append(root)
-        curr_layer = []
-        while(q):
-            curr_node = q.popleft()
-            if curr_node:
-                curr_layer.append(curr_node.val)
-                q.append(curr_node.left)
-                q.append(curr_node.right)
-                next_layer_count = next_layer_count + 2
-            curr_layer_count = curr_layer_count - 1
-            if not curr_layer_count:
-                curr_layer_count = next_layer_count
-                next_layer_count = 0
-                if curr_layer:
-                    res.append(curr_layer)
-                curr_layer = []
-        
-        return res
+            return []
+        q = deque([root])
+        ret = []
+        while q:
+            level = []
+            for _ in range(len(q)):
+                cur = q.popleft()
+                level.append(cur.val)
+                if cur.left:
+                    q.append(cur.left)
+                if cur.right:
+                    q.append(cur.right)
+            ret.append(level)
+        return ret
