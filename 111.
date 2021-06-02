@@ -16,6 +16,7 @@ public:
 };
 
 # python
+# bad solution
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
         if not root:
@@ -28,3 +29,23 @@ class Solution:
             return self.minDepth(root.left) + 1
             
         return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+
+# elegant solution
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        q = collections.deque([root])
+        ans = 1
+
+        while q:
+            for _ in range(len(q)):
+                cur = q.popleft()
+                if not cur.left and not cur.right:
+                    return ans
+                if cur.left:
+                    q.append(cur.left)
+                if cur.right:
+                    q.append(cur.right)
+            ans += 1
