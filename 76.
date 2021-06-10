@@ -4,11 +4,11 @@ class Solution:
         need = collections.defaultdict(int)
         for c in t:
             need[c] += 1
+        classes = sum(map(lambda x: 1 if x > 0 else 0, need.values()))
         window = collections.defaultdict(int)
         l = r = 0
         start, res = 0, float('inf')
         valid = 0
-
         while r < len(s):
             new_c = s[r]
             r += 1
@@ -16,8 +16,7 @@ class Solution:
                 window[new_c] += 1
                 if window[new_c] == need[new_c]:
                     valid += 1
-
-            while valid == len(t):
+            while valid == classes:
                 if r - l < res:
                     start = l
                     res = r - l
