@@ -4,7 +4,7 @@ class Solution:
         need = collections.defaultdict(int)
         for c in t:
             need[c] += 1
-        classes = sum(map(lambda x: 1 if x > 0 else 0, need.values()))
+        classes = len(need)
         window = collections.defaultdict(int)
         l = r = 0
         start, res = 0, float('inf')
