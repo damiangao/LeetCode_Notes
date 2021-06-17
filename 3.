@@ -1,4 +1,4 @@
-# elegant solution
+# traditional solution
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         window = collections.defaultdict(int)
@@ -18,7 +18,7 @@ class Solution:
             ret = length if length > ret else ret
         return ret 
         
-# old solution
+# elegant solution
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if not s:
