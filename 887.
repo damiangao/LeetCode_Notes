@@ -1,3 +1,17 @@
+# state compression O(KN) O(K)
+class Solution:
+    def superEggDrop(self, k: int, n: int) -> int:
+        dp = [0] * (k + 1)
+        m = 0
+        while dp[k] < n:
+            pre = dp[0]
+            m += 1
+            for i in range(1, k + 1):
+                temp = dp[i]
+                dp[i] = pre + dp[i] + 1
+                pre = temp
+        return m
+        
 # redefine state O(KN) O(KN)
 class Solution:
     def superEggDrop(self, k: int, n: int) -> int:
