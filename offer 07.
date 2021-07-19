@@ -1,0 +1,17 @@
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def dfs(pl, pr, il, ir):
+            if pl > pr:
+                return None
+            val = preorder[pl]
+            node = TreeNode(val)
+
+            idx = finder[val]
+            l_len = idx - il
+            node.left = dfs(pl + 1, pl + l_len, il, idx - 1)
+            node.right = dfs(pl + l_len + 1, pr, idx + 1, ir)
+            return node
+
+        finder = {val: idx for idx, val in enumerate(inorder)}
+        n = len(preorder)
+        return dfs(0, n-1, 0, n-1)
