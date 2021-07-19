@@ -13,9 +13,8 @@ class Solution:
                 del_c = s[l]
                 l += 1
                 window[del_c] -= 1
-            
-            length = r - l
-            ret = length if length > ret else ret
+   
+            ret = max(ret, l - r)
         return ret 
         
 # elegant solution
