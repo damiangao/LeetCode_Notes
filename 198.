@@ -1,3 +1,18 @@
+# use memo
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        memo = dict()
+        def dp(i):
+            if i < n:
+                if i in memo:
+                    return memo[i]
+                memo[i] = max(dp(i+2) + nums[i], dp(i+1))
+                return memo[i]
+            else:
+                return 0
+        return dp(0)
+        
 # timeover
 class Solution:
     def rob(self, nums: List[int]) -> int:
