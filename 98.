@@ -1,71 +1,12 @@
-# bad solution
 class Solution(object):
     def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        res, _, _ = self.dfs(root)
-        return res
-    def dfs(self, root):
-        if not root:
-            return True, None, None
-
-        if not root.left:
-            l = True
-            l_min = root.val
-        else:
-            l, l_min, l_max = self.dfs(root.left)
-            l = l and l_max < root.val
-        
-        if not root.right:
-            r = True
-            r_max = root.val
-        else:
-            r, r_min, r_max = self.dfs(root.right)
-            r = r and r_min > root.val
-
-        return l and r, l_min, r_max.
-        
-# good solution 1
-class Solution(object):
-    def __init__(self):
-        self.traverse = []
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        self.dfs(root)
-        if not self.traverse:
-            return True
-        l = self.traverse[0]
-        for r in self.traverse[1:]:
-            if l >= r:
-                return False
-            l = r
-        return True
-    def dfs(self, root):
-        if not root:
-            return
-        self.dfs(root.left)
-        self.traverse.append(root.val)
-        self.dfs(root.right)
-
-# good solution 2
-class Solution(object):
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
         return self.dfs(root, None, None)
-    def dfs(self, root, min_val, max_val):
+
+    def dfs(self, root, min_, max_):
         if not root:
             return True
-        if min_val != None and root.val <= min_val:
+        if min_ and root.val <= min_.val:
             return False
-        if max_val != None and root.val >= max_val:
+        if max_ and root.val >= max_.val:
             return False
-        
-        return self.dfs(root.left, min_val, root.val) and self.dfs(root.right, root.val, max_val)
+        return self.dfs(root.left, min_, root) and self.dfs(root.right, root, max_)
