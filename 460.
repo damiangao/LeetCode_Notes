@@ -1,0 +1,56 @@
+class LFUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.size = 0
+        self.min_freq = 0
+        self.KV = dict()
+        self.KF = dict()
+        self.FKs = dict()
+
+    def get(self, key: int) -> int:
+        if key in self.KV:
+            val = self.KV[key]
+            self.update_freq(key)
+            return val
+        else:
+            return -1
+
+    def put(self, key: int, value: int) -> None:
+        if self.capacity == 0:
+            return
+        if key in self.KV:
+            self.KV[key] = value
+            self.update_freq(key)
+        else:
+            if self.capacity == self.size:
+                self.pop()
+            self.add(key, value)
+
+    def update_freq(self, key):
+        node_freq = self.KF[key]
+        val = self.KV[key]
+        self.KF[key] += 1
+        self.FKs[node_freq].pop(key)
+        self.add_FKs(node_freq+1, key, val)
+
+        if node_freq == self.min_freq and not self.FKs[self.min_freq]:
+            self.min_freq += 1
+
+    def pop(self):
+        key, val = self.FKs[self.min_freq].popitem(last=False)
+        self.KV.pop(key)
+        self.KF.pop(key)
+        self.size -= 1
+
+    def add(self, key, val):
+        self.KV[key] = val
+        self.KF[key] = 1
+        self.add_FKs(1, key, val)
+        self.size += 1
+        self.min_freq = 1
+    
+    def add_FKs(self, freq, key, value):
+        if freq not in self.FKs:
+            self.FKs[freq] = collections.OrderedDict()
+        self.FKs[freq][key] = value
