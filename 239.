@@ -1,3 +1,41 @@
+# easy to understand
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        mono_q = monotonicQueue()
+        q = collections.deque()
+        ret = []
+
+        for i in range(k-1):
+            q.append(nums[i])
+            mono_q.push(nums[i])
+        
+        for i in range(k-1, n):
+            q.append(nums[i])
+            mono_q.push(nums[i])
+            max_ = mono_q.max()
+            ret.append(max_)
+            if max_ == q[0]:
+                mono_q.pop()
+            q.popleft() 
+
+        return ret
+
+class monotonicQueue():
+    def __init__(self):
+        self._q = collections.deque()
+
+    def max(self):
+        return self._q[0]
+    
+    def push(self, x):
+        while self._q and x > self._q[-1]:
+            self._q.pop()
+        self._q.append(x)
+    
+    def pop(self):
+        self._q.popleft()
+        
 #elegant solution
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
