@@ -2,7 +2,7 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
-        mono_q = monotonicQueue()
+        mono_q = MonotonicQueue()
         q = collections.deque()
         ret = []
 
@@ -21,7 +21,7 @@ class Solution:
 
         return ret
 
-class monotonicQueue():
+class MonotonicQueue():
     def __init__(self):
         self._q = collections.deque()
 
