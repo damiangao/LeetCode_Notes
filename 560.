@@ -1,7 +1,6 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        cur_sum = 0
-        ret = 0
+        cur_sum, ret = 0, 0
         count = collections.defaultdict(int)
         count[0] = 1
         for x in nums:
