@@ -1,20 +1,16 @@
-class Solution(object):
+class Solution:
     def __init__(self):
-        self.res = []
-    def binaryTreePaths(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[str]
-        """
-        self.dfs(root, '')
-        return self.res
+        self.ret = []
 
-    def dfs(self, root, curr):  
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        self.trackback(root, [])
+        return self.ret
+    
+    def trackback(self, root, trace):
         if root:
+            trace.append(str(root.val))
             if not root.left and not root.right:
-                curr = curr + str(root.val)
-                self.res.append(curr)
-            else:
-                curr = curr + str(root.val)+ "->"
-                self.dfs(root.left, curr)
-                self.dfs(root.right, curr)
+                self.ret.append('->'.join(trace))
+            self.trackback(root.left, trace)
+            self.trackback(root.right, trace)
+            trace.pop()
