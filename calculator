@@ -1,0 +1,33 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        def helper(s):
+            stk = []
+            num = 0
+            sign = '+'
+            while len(s) > 0:
+                c = s.pop(0)
+                if c.isdigit():
+                    num = 10 * num + int(c)
+                if c == '(':
+                    num = helper(s)
+                if (not c.isdigit() and c != ' ') or 0 == len(s):
+                    if sign == '+':
+                        stk.append(num)
+                    elif sign == '-':
+                        stk.append(-num)
+                    elif sign == '*':
+                    pre = stk.pop()
+                    stk.append(pre * num)
+                    elif sign == '/':
+                    pre = stk.pop()
+                    
+                    if pre < 0:
+                        stk.append(-(abs(pre) // num))
+                    else:
+                        stk.append(pre // num)
+                    sign = c
+                    num = 0
+                if c == ')':
+                    break
+            return sum(stk)
+        return helper(list(s))
