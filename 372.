@@ -1,3 +1,15 @@
+# elegant solution 
+class Solution:
+    def superPow(self, a: int, b: List[int]) -> int:
+        base = 1337
+        a %= base
+        if not b:
+            return 1
+        last = b.pop() % base
+        part1 = (a ** last) % base
+        part2 = (self.superPow(a, b) ** 10) % base
+        return (part1 * part2) % base
+
 # naive solution
 class Solution:
     def superPow(self, a: int, b: List[int]) -> int:
