@@ -1,3 +1,55 @@
+# elegant solution O(log(n)) O(n)
+class ExamRoom(object):
+    # pair两头开
+    def __init__(self, N):
+        self.n = N
+        self.pair_l2r = {}
+        self.pair_r2l = {}
+        self.heap = []
+        self.push_pair(-1, self.n)
+
+    def seat(self):
+        l, r = self.longest_pair()
+        if l == r - 1:
+            ret = -1
+        if l == -1:
+            ret = 0
+        elif r == self.n:
+            ret = r - 1
+        else:
+            ret = l + ((r - l) >> 1)
+        self.pair_l2r.pop(l, -2)
+        self.pair_r2l.pop(r, -2)
+
+        self.push_pair(l, ret)
+        self.push_pair(ret, r)
+        return ret
+
+    def leave(self, p):
+        l = self.pair_r2l.pop(p, p - 1)
+        r = self.pair_l2r.pop(p, p + 1)
+        self.pair_l2r.pop(l, -2)
+        self.pair_r2l.pop(r, -2) 
+        self.push_pair(l, r)
+
+    def push_pair(self, l, r):
+        if -1 <= l < r <= self.n and l < r - 1:
+            if l == -1 or r == self.n:
+                dist = r - l - 1
+            else:
+                dist = (r - l) // 2
+            heapq.heappush(self.heap, (-dist, l, r))
+            self.pair_l2r[l] = r
+            self.pair_r2l[r] = l
+
+    def longest_pair(self):
+        l = r = -2
+        while self.heap:
+            _, l, r = heapq.heappop(self.heap)
+            if self.pair_l2r.get(l, -99) == r and self.pair_r2l.get(r, -99) == l:
+                break
+        return l, r
+        
 # naive solution O(n)
 class ExamRoom(object):
     def __init__(self, N):
