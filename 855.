@@ -1,0 +1,29 @@
+# naive solution O(n)
+class ExamRoom(object):
+    def __init__(self, N):
+        self.n = N
+        self.students = [] # 学生座位情况，当前落座位置的有序列表
+
+    def seat(self):
+
+        if not self.students:
+            # 位置全空, 下个位置为0
+            next_seat = 0
+        else:
+            dist, next_seat = self.students[0], 0
+            for i, pos in enumerate(self.students):
+                if i:
+                    # 遍历每个间隔
+                    prev = self.students[i - 1]
+                    d = (pos - prev) // 2
+                    if d > dist:
+                        dist, next_seat = d, prev + d
+            # 考虑最后一个学生到最后一个座位的间隔
+            d = self.n - 1 - self.students[-1]
+            if d > dist:
+                next_seat = self.n - 1
+        bisect.insort(self.students, next_seat)
+        return next_seat
+
+    def leave(self, p):
+        self.students.remove(p)
