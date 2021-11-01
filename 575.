@@ -1,0 +1,7 @@
+class Solution:
+    def distributeCandies(self, candyType: List[int]) -> int:
+        length = len(candyType)
+        d = collections.defaultdict(int)
+        for x in candyType:
+            d[x] += 1
+        return min(length // 2, len(d))
