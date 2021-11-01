@@ -1,3 +1,11 @@
+#elegant solution
+class Solution:
+    def distributeCandies(self, candyType: List[int]) -> int:
+        length = len(candyType)
+        d = set(candyType)
+        return min(length // 2, len(d))
+
+# bad solution
 class Solution:
     def distributeCandies(self, candyType: List[int]) -> int:
         length = len(candyType)
