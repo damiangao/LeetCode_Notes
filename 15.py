@@ -2,9 +2,11 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
+        # 排序
         nums.sort()
         ret = []
         for first in range(n-2):
+            # 需要与上一轮取数不同
             if first > 0 and nums[first] == nums[first-1]:
                 continue
             target = -nums[first]
@@ -18,5 +20,5 @@ class Solution:
                         break 
                     if nums[second] + nums[third] < target:
                         break  
-                    third -= 1     
+                    third -= 1    
         return ret
